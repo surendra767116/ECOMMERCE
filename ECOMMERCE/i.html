@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Suvendra Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-blue-600 p-4 flex justify-between items-center text-white">
+        <h1 class="text-2xl font-bold">Your Cart</h1>
+        <a href="index.html" class="hover:underline">Back to Store</a>
+    </nav>
+
+    <div class="container mx-auto mt-6 p-4 bg-white shadow-lg rounded-lg">
+        <div id="cart-items" class="space-y-4"></div>
+        <div id="total-price" class="text-right text-lg font-semibold mt-4"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            updateCart();
+        });
+
+        function updateCart() {
+            const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartContainer = document.getElementById("cart-items");
+            const totalPriceElement = document.getElementById("total-price");
+            cartContainer.innerHTML = '';
+
+            if (cartItems.length === 0) {
+                cartContainer.innerHTML = "<p class='text-center text-gray-500'>Your cart is empty.</p>";
+                totalPriceElement.textContent = "";
+                return;
+            }
+
+            let totalPrice = 0;
+
+            cartItems.forEach((item, index) => {
+                totalPrice += item.price;
+
+                const cartItem = document.createElement("div");
+                cartItem.className = "flex items-center p-4 border rounded-lg shadow-sm bg-gray-50";
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-lg mr-4">
+                    <div class="flex-1">
+                        <h3 class="text-lg font-semibold">${item.name}</h3>
+                        <p class="text-gray-700">$${item.price.toFixed(2)}</p>
+                    </div>
+                    <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition" onclick="removeFromCart(${index})">Remove</button>
+                `;
+                cartContainer.appendChild(cartItem);
+            });
+
+            totalPriceElement.textContent = `Total: $${totalPrice.toFixed(2)}`;
+        }
+
+        function removeFromCart(index) {
+            let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+            cartItems.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cartItems));
+            updateCart();
+        }
+    </script>
+</body>
+</html>

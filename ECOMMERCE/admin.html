@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-blue-600 p-4 text-white flex justify-between items-center">
+        <h1 class="text-xl font-bold">Admin Panel</h1>
+        <a href="index.html" class="text-white hover:underline">View Store</a>
+    </nav>
+
+    <div class="max-w-2xl mx-auto bg-white p-6 mt-10 rounded-lg shadow-lg">
+        <form class="space-y-4" id="productForm">
+            <div>
+                <label class="block font-medium">Product Name</label>
+                <input type="text" id="productName" class="w-full p-2 border rounded" required>
+            </div>
+            <div>
+                <label class="block font-medium">Price</label>
+                <input type="number" id="productPrice" step="0.01" class="w-full p-2 border rounded" required>
+            </div>
+            <div>
+                <label class="block font-medium">Upload Image</label>
+                <input type="file" id="productImage" accept="image/*" class="w-full p-2 border rounded" required>
+                <img id="preview" class="mt-3 w-36 h-36 object-cover border hidden">
+            </div>
+            <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition">Add Product</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('productImage').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('preview').src = e.target.result;
+                    document.getElementById('preview').classList.remove("hidden");
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('productForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const fileInput = document.getElementById('productImage');
+            const reader = new FileReader();
+            const file = fileInput.files[0];
+
+            if (file) {
+                reader.readAsDataURL(file);
+                reader.onload = function(e) {
+                    saveProduct(e.target.result);
+                };
+            }
+        });
+
+        function saveProduct(imageBase64) {
+            const products = JSON.parse(localStorage.getItem('products')) || [];
+
+            const newProduct = {
+                id: Date.now(),
+                name: document.getElementById('productName').value,
+                price: parseFloat(document.getElementById('productPrice').value),
+                image: imageBase64
+            };
+
+            products.push(newProduct);
+            localStorage.setItem('products', JSON.stringify(products));
+
+            alert('Product added successfully!');
+            document.getElementById('productForm').reset();
+            document.getElementById('preview').classList.add("hidden");
+        }
+    </script>
+</body>
+</html>

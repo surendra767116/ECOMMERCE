@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suvendra Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-blue-600 p-4 flex justify-between items-center text-white">
+        <h1 class="text-2xl font-bold">Welcome to Our Store</h1>
+        <div class="space-x-4">
+            <a href="cart.html" class="hover:underline">CART</a>
+            <a href="login.html" class="hover:underline">LOGIN</a>
+            <a href="adminlogin.html" class="hover:underline">ADMIN</a>
+        </div>
+    </nav>
+    
+    <h1 class="text-center text-3xl font-bold my-6">Welcome to Our Store</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6" id="productsContainer">
+        <!-- Products will be dynamically loaded -->
+    </div>
+
+    <script>
+        function loadProducts() {
+            const productsContainer = document.getElementById('productsContainer');
+            const products = JSON.parse(localStorage.getItem('products')) || [];
+            productsContainer.innerHTML = '';
+
+            products.forEach(product => {
+                const productCard = document.createElement("div");
+                productCard.className = "bg-white shadow-lg rounded-lg p-4 text-center";
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover rounded-md">
+                    <h2 class="text-xl font-semibold my-2">${product.name}</h2>
+                    <p class="text-lg font-bold text-gray-700">$${product.price.toFixed(2)}</p>
+                    <button class="mt-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" onclick="addToCart('${product.name}', ${product.price}, '${product.image}')">Add to Cart</button>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+        }
+
+        function addToCart(name, price, image) {
+            let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+            cartItems.push({ name, price, image });
+            localStorage.setItem("cart", JSON.stringify(cartItems));
+            window.location.href = "cart.html";
+        }
+
+        document.addEventListener("DOMContentLoaded", loadProducts);
+    </script>
+</body>
+</html>

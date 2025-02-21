@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Cart page styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #fff;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header-container {
+            text-align: center;
+        }
+        .header-container h1 {
+            margin: 0;
+            color: #333;
+        }
+
+        /* Cart section */
+        .cart-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-container h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .cart-items {
+            margin-top: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .cart-item-price {
+            color: #555;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cart-item-remove {
+            padding: 8px 15px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .cart-item-remove:hover {
+            background-color: #c0392b;
+        }
+
+        /* Summary section */
+        .cart-summary {
+            margin-top: 30px;
+            text-align: center;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .cart-summary p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .checkout-button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .checkout-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <h1>Your Cart</h1>
+        </div>
+    </header>
+
+    <div class="cart-container">
+        <h2>Items in Your Cart</h2>
+
+        <div class="cart-items">
+            <!-- Cart Item 1 -->
+            <div class="cart-item">
+                <img src="https://via.placeholder.com/80" alt="Product Image">
+                <div class="cart-item-details">
+                    <p class="cart-item-name">Product Name 1</p>
+                    <p class="cart-item-price">Price: $29.99</p>
+                </div>
+                <div class="cart-item-actions">
+                    <button class="cart-item-remove">Remove</button>
+                </div>
+            </div>
+
+            <!-- Cart Item 2 -->
+            <div class="cart-item">
+                <img src="https://via.placeholder.com/80" alt="Product Image">
+                <div class="cart-item-details">
+                    <p class="cart-item-name">Product Name 2</p>
+                    <p class="cart-item-price">Price: $49.99</p>
+                </div>
+                <div class="cart-item-actions">
+                    <button class="cart-item-remove">Remove</button>
+                </div>
+            </div>
+
+            <!-- Cart Item 3 -->
+            <div class="cart-item">
+                <img src="https://via.placeholder.com/80" alt="Product Image">
+                <div class="cart-item-details">
+                    <p class="cart-item-name">Product Name 3</p>
+                    <p class="cart-item-price">Price: $19.99</p>
+                </div>
+                <div class="cart-item-actions">
+                    <button class="cart-item-remove">Remove</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="cart-summary">
+            <p>Total Items: 3</p>
+            <p>Total Price: 99.97</p>
+            <button class="checkout-button">Proceed to Checkout</button>
+        </div>
+    </div>
+
+</body>
+</html>
